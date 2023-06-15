@@ -1,1 +1,6 @@
-administrador.php
+<?php
+class Administrador 
+{
+	
+}
+?>
