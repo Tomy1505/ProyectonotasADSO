@@ -1,1 +1,8 @@
-docentes.php
+<?php
+
+class docente
+{
+	
+}
+
+?>
