@@ -9,7 +9,7 @@ class Conexion
 	private $user = "root";
 	private $password = "";
 
-	public function __construct();
+	public function __construct()
 	{
 		try
 		{
@@ -17,12 +17,14 @@ class Conexion
 
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-			return $db;
+			//return $db;
+
+			echo "conexión realizada";
 
 		}
 		catch(PDOException $e)
 		{
-			echo "se tiene problemas para conectar ".$e->getMessage();
+			echo "se tiene problemas para conectar".$e->getMessage();
 		}
 	}
 }
