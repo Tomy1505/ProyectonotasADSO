@@ -20,7 +20,7 @@ class Administrador extends Conexion
 		if($statement->execute())
 		{
 			echo "usuario registrado";
-			header('Location: ..pages/index.php');
+			header('Location: ../pages/index.php');
 		}
 		else
 		{
@@ -75,7 +75,7 @@ class Administrador extends Conexion
 		}
 	}
 	//función para eliminar un usuario
-	public function deletead($Id)
+	/*public function deletead($Id)
 	{
 		$statement=$this->db->prepare("DELETE * FROM usuarios WHERE id_usuario=$Id");
 		$statement->bindParam(':Id',$Id);
@@ -89,6 +89,6 @@ class Administrador extends Conexion
 			echo "El usuario no se puede eliminar";
 			header('Location: ../pages/eliminar.php');
 		}
-	}
+	}*/
 }
 ?>
