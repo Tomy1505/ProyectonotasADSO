@@ -6,17 +6,29 @@ class Administrador extends Conexion
 	{
 		$this->db = parent::__construct();
 	}
-	//inserta un usuario
+	//verificar que no exista un usuario en la bd
 	public function agregarad($Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Perfilad,$Estadoad)
 	{
-		$statement = $this->db->prepare("INSERT INTO usuarios(Nombreusu,Apellidousu,Usuario,Passwordusu,Perfil,Estado)values(:Nombread,:Apellidoad,:Usuarioad,:Passwordad,:'Administrador',:'Activo')");
+		$sql1 = "SELECT * FROM usuarios WHERE Usuario ='$Usuarioad'";
+		$Resultado=$this->db->query($sql1);
+		if($Resultado->rowCount()>0){
 
-		$statement->bindParam(":Nombread",$Nombreusu);
-		$statement->bindParam(":Apellidoad",$Apellidousu);
-		$statement->bindParam(":Usuarioad",$Usuario);
-		$statement->bindParam(":Passwordad",$Passwordusu);
-		$statement->bindParam(":Perfilad",$Perfil);
-		$statement->bindParam(":Estadoad",$Estado);
+			echo "<script>
+				alert('El usuario ya esta registrado');
+				window.location = '../pages/agregar.php';
+			</script>";
+		}
+		else
+		{
+		//crear la sentencia sql
+		$statement = $this->db->prepare("INSERT INTO usuarios(Nombreusu,Apellidousu,Usuario,Passwordusu,Perfil,Estado)values(:Nombread,:Apellidoad,:Usuarioad,:Passwordad,:Perfilad,:Estadoad)");
+
+		$statement->bindParam(":Nombread",$Nombread);
+		$statement->bindParam(":Apellidoad",$Apellidoad);
+		$statement->bindParam(":Usuarioad",$Usuarioad);
+		$statement->bindParam(":Passwordad",$Passwordad);
+		$statement->bindParam(":Perfilad",$Perfilad);
+		$statement->bindParam(":Estadoad",$Estadoad);
 		if($statement->execute())
 		{
 			echo "usuario registrado";
@@ -28,37 +40,38 @@ class Administrador extends Conexion
 			header('Location: ../pages/agregar.php');
 		}
 	}
+	}
 
 	//función para seleccionar todos los usuarios con el rol administrador
 	public function getad()
 	{
-		$row = null;
-		$statement=$this->db->prepare("SELECT * FROM usuarios WHERE Perfil='Administrador'");
-		$statement->execute();
-		while($resul = $statement->fetch())
-		{
-			$row[]=$resul;
-		}
-		return $row;
-
+		$sql = "SELECT * FROM usuarios WHERE Perfil='Administrador'";
+		$result = $this->db->query($sql);
+		if($result->rowCount()>0){
+			while($row = $result->fetch()){
+				$result[]=$row;
+			}
+		}return $result;
 	}
+	
 	//función para seleccionar un usuario por su id
 	public function getidad($Id)
 	{
-		$row = null;
-		$statement=$this->db->prepare("SELECT * FROM usuarios WHERE Perfil='administrador' AND id_usuario=:Id");
+		$statement=$this->db->prepare("SELECT * FROM usuarios WHERE id_usuario=:Id");
 		$statement->bindParam(':Id',$Id);
 		$statement->execute();
-		while($resul = $statement->fetch())
-		{
-			$row=$resul;
-		}
+
+		//Obtener los resultados utilizando fetch()
+		$result = $statement->fetch(PDO::FETCH_ASSOC);
+		
+		//Devolver los resultados
 		return $row;
 	}
+
 	//función para actualizar los datos de usuario
-	public function updatead($Id,$Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Estadoad)
+	public function updatead($Id,$Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Perfil,$Estadoad)
 	{
-		$statement=$this->db->prepare("UPDATE usuarios SET Nombreusu=:Nombread, Apellidousu=:Apellidoad,Usuario=:Usuarioad, Passwordusu=:Passwordad, Estado=:Estadoad WHERE id_usuario=$Id");
+		$statement=$this->db->prepare("UPDATE usuarios SET id_usuario=:Id,Nombreusu=:Nombread, Apellidousu=:Apellidoad,Usuario=:Usuarioad, Passwordusu=:Passwordad, Estado=:Estadoad WHERE id_usuario=$Id");
 	
 		$statement->bindParam(':Id',$Id);
 		$statement->bindParam('Nombread',$Nombread);
@@ -90,5 +103,5 @@ class Administrador extends Conexion
 			header('Location: ../pages/eliminar.php');
 		}
 	}*/
-}
+	}
 ?>
