@@ -36,10 +36,10 @@
 						<td><?php echo $datos['id_usuario']?></td>
 						<td><?php echo $datos['Nombreusu']?></td>
 						<td><?php echo $datos['Apellidousu']?></td>
-						<td><?php echo $datos['usuario']?></td>
+						<td><?php echo $datos['Usuario']?></td>
 						<td><?php echo $datos['Perfil']?></td>
 						<td><?php echo $datos['Estado']?></td>
-						<td><a href="editar.php?=Id=<?php echo $datos['id_usuario']?>" class="btn btn-danger">ACTUALIZAR</a></td>
+						<td><a href="editar.php?Id=<?php echo $datos['id_usuario']?>" class="btn btn-danger">ACTUALIZAR</a></td>
 						<td><a href="eliminar.php?Id=<?php echo $datos['id_usuario']?>" class="btn btn-primary">ELIMINAR</a></td>
 					</tr>
 				<?php } ?>

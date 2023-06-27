@@ -1,6 +1,6 @@
 <?php
 require_once('../../conexion.php');
-require_once('../models/estudiantes.php');
+require_once('../modelos/estudiantes.php');
 
 if($_POST){
     $Est = new Estudiantes();

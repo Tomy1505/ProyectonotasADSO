@@ -11,7 +11,7 @@ $Apellidousu = $_POST['txtapellido'];
 $Usuariousu = $_POST['txtusu'];
 $Passwordusu = $_POST['txtpass'];
 $Perfil = $_POST['txtperfil'];
-$Estado = $_POST['txtest'];
+$Estado = $_POST['txtestado'];
 
 $admin->updatead($Id,$Nombreusu,$Apellidousu,$Usuariousu,$Passwordusu,$Perfil,$Estado);    
 }

@@ -4,19 +4,23 @@ class Administrador extends Conexion
 {
 	public function __construct()
 	{
-		this->db = parent::__construct();
+		$this->db = parent::__construct();
 	}
 	//inserta un usuario
 	public function agregares($Nombrees,$Apellidoes,$Documentoes,$Correoes,$Promedioes,$Fecha_registroes)
 	{
-		$statement = $this->db->prepare("INSERT INTO estudiantes(Nombreest,Apellidoest,Documentoest,Correoest,Materiaest,Docenteest,Promedioest,Fecha_registroest)values(:Nombrees,:Apellidoes,:Documentoes,:Correoes,:Promedioes,:Fecha_registroes,:'Estudiantes',:'Activo')")
-	
-		$statement->bindParam(":Nombrees",$Nombreest);
-		$statement->bindParam(":Apellidoes",$Apellidoest);
-		$statement->bindParam(":Documentoes",$Documentoest);
-		$statement->bindParam(":Correoes",$Correoest);
-		$statement->bindParam(":Promedioes",$Promedioest);
-		$statement->bindParam(":Fecha_registroes",$Fecha_registroest);
+		$sql1 = "SELECT * FROM estudiantes WHERE Doumento ='$Documentoes'";
+		$Resultado=$this->db->query($sql1);
+		if($Resultado->rowCount()>0){
+
+			echo "<script>
+				alert('El estudiante ya esta registrado');
+				window.location = '../pages/agregar.php';
+			</script>";
+		}
+		else
+		{
+		//crear la sentencia sql
 		if($statement->execute())
 		{
 			echo "usuario registrado";
@@ -25,7 +29,7 @@ class Administrador extends Conexion
 		else
 		{
 			echo "No se puede realizar el registro";
-			header('Location: ../pages/agregar');
+			header('Location: ../pages/agregar.php');
 		}
 	}
 	public function getes()

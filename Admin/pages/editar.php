@@ -8,12 +8,10 @@
 	<title></title>
 </head>
 <body>
-	<div class="content">
-		<form action="../controladores/editarusuario.php" method="POST">
-			<?php
+	<?php
 
 	require_once('../../conexion.php');
-	require_once('../../modelos/administrador.php');
+	require_once('../modelos/administrador.php');
 
 	$Id = $_GET['Id'];
 	$admin = new Administrador();
@@ -23,37 +21,43 @@
 
 	?>
 		<h1>ACTUALIZAR FORMULARIO</h1>
+		<form action="../controladores/editarAdministrador.php" method="POST">
 		<input type="hidden" name="Id" value="<?php echo $Id ?>">
 			<div class="form-group">
 				<label>Nombre:</label>
-				<input type="text" name="txtnombre" value="<?php echo $row['Nombread'?>">
+				<input type="text" name="txtnombre" value="<?php echo $row['Nombreusu']?>">
 			</div>
 			<div class="form-group">
 				<label>Apellido:</label>
-				<input type="text" name="txtapellido" value="<?php echo $row['Apellidoad'?>">
+				<input type="text" name="txtapellido" value="<?php echo $row['Apellidousu']?>">
 			</div>
 			<div class="form-group">
 				<label>Usuario:</label>
-				<input type="text" name="txtusu" value="<?php echo $row['Usuario'?>">
+				<input type="text" name="txtusu" value="<?php echo $row['Usuario']?>">
 			</div>
 			<div class="form-group">
 				<label>Contraseña:</label>
-			<input type="text" name="txtpass" value="<?php echo $row['Passwordusu'?>">
+			<input type="password" name="txtpass" value="<?php echo $row['Passwordusu']?>">
 			</div>
 			<div class="form-group">
 				<label>Perfil:</label>
-				<input type="text" name="txtperfil">
+				<select name="txtperfil">
+		        <option value="Administrador">Administrador</option>
+		        <option value="Docente">Docente</option>
+		   </select>
 			</div>
-		</select>
-			</div>
+			
 			<div class="form-group">
-				<p>Estado</p>
-					<label for="perfil"><label>
-		</select>
+				<label>Estado:</label>
+				<select name="txtestado">
+		        <option value="Activo">Activo</option>
+		        <option value="No activo">No activo</option>
+		   </select>
 			</div>
 			<br>
 			<input type="submit" class="btn btn-primary">
 		</form>
+	<?php } ?>
 	</div>
 
 

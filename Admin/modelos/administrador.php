@@ -45,13 +45,28 @@ class Administrador extends Conexion
 	//función para seleccionar todos los usuarios con el rol administrador
 	public function getad()
 	{
-		$sql = "SELECT * FROM usuarios WHERE Perfil='Administrador'";
+
+     $sql= "SELECT * FROM usuarios WHERE Perfil='Administrador'";
+     $resul = $this->db->query($sql);
+     if($resul->rowCount()>0){
+     	while($row=$resul->fetch())
+     	{
+     		$Resultado[]=$row;
+     	}
+
+     }	
+     return $Resultado;
+		
+
+	/*$sql = "SELECT * FROM usuarios WHERE Perfil='Administrador'";
 		$result = $this->db->query($sql);
 		if($result->rowCount()>0){
 			while($row = $result->fetch()){
 				$result[]=$row;
 			}
-		}return $result;
+		}
+		return $result;*/
+
 	}
 	
 	//función para seleccionar un usuario por su id
@@ -65,18 +80,23 @@ class Administrador extends Conexion
 		$result = $statement->fetch(PDO::FETCH_ASSOC);
 		
 		//Devolver los resultados
-		return $row;
+		return $result;
 	}
 
 	//función para actualizar los datos de usuario
 	public function updatead($Id,$Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Perfil,$Estadoad)
 	{
-		$statement=$this->db->prepare("UPDATE usuarios SET id_usuario=:Id,Nombreusu=:Nombread, Apellidousu=:Apellidoad,Usuario=:Usuarioad, Passwordusu=:Passwordad, Estado=:Estadoad WHERE id_usuario=$Id");
+		$statement=$this->db->prepare("UPDATE usuarios SET id_usuario=:Id,Nombreusu=:Nombread,Apellidousu=:Apellidoad,Usuario=:Usuarioad,Passwordusu=:Passwordad,Perfil:=Perfil,Estado=:Estadoad WHERE id_usuario=$Id");
+		$statement->bindParam(':Id',$Id);
+		$statement->bindParam('Nombread')
+		/*$statement=$this->db->prepare("UPDATE usuarios SET id_usuario=:Id,Nombreusu=:Nombread,Apellidousu=:Apellidoad,Usuario=:Usuarioad,Passwordusu=:Passwordad,Perfil:=Perfil,Estado=:Estadoad WHERE id_usuario=$Id");
 	
 		$statement->bindParam(':Id',$Id);
 		$statement->bindParam('Nombread',$Nombread);
 		$statement->bindParam(':Apellidoad',$Apellidoad);
 		$statement->bindParam(':Usuarioad',$Usuarioad);
+		$statement->bindParam(':Passwordad',$Passwordad);
+		$statement->bindParam(':Perfil',$Perfil);
 		$statement->bindParam(':Estadoad',$Estadoad);
 		if($statement->execute())
 		{
@@ -85,7 +105,7 @@ class Administrador extends Conexion
 		else
 		{
 			header('Location: ../pages/editar.php');
-		}
+		}*/
 	}
 	//función para eliminar un usuario
 	/*public function deletead($Id)

@@ -28,14 +28,22 @@
 				<label>Contraseña:</label>
 			<input type="text" name="txtpass">
 			</div>
-			<div class="form-group">
-				<label>Perfil:</label>
-				<input type="text" name="txtperfil">
-			</div>
-			<div class="form-group">
-				<label>Estado</label>
-				<input type="text" name="txtest">
-			</div>
+			<br>
+				<label for="Perfil">Perfil</label>
+                	<select name="txtperfil" id="perfil">
+                	<option selected>Elegir opcion</option>
+                	<option value="Administrador">Administrador</option>
+                	<option value="Docente">Docente</option>
+            </select>
+			<br>
+			<br>
+				<label for="Estado">Estado</label>
+                	<select name="txtest" id="estado">
+                	<option selected>Elegir opcion</option>
+                	<option value="Activo">Activo</option>
+                	<option value="Inactivo">Inactivo</option>
+            </select>
+			<br>
 			<br>
 			<input type="submit" class="btn btn-primary">
 		</form>

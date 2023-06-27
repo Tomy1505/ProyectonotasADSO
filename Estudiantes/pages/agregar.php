@@ -9,7 +9,7 @@
 <body>
 	<div class="content">
 		<form action="agregarEstudiante.php" method="POST">
-		<h1>Formulario Docente</h1>
+		<h1>Formulario Estudiante</h1>
 			<div class="form-group">
 				<label>Nombre:</label>
 				<input type="text" name="txtnombre">
