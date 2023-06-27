@@ -8,7 +8,18 @@
 		}
 		public function agregarad($Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Perfilad,$Estadoad)
 		{
-			$statement = $this->db->prepare("INSERT INTO usuarios(Nombreusu,Apellidousu,Usuario,Passwordusu,Perfil,Estado)values(:Nombread,:Apellidoad,:Usuarioad,:Passwordad,:'Administrador',:'Activo')");
+			$sql1 = "SELECT * FROM usuarios WHERE Usuario = 'Usuarioad'";
+			$Resultado = $this->db->query($sql1);
+			if($Resultado->rowCount() > 0){
+
+				echo "<script>
+					alert('El usuario ya esta registrado');
+					window.location = '../pages/agregar.php';
+					</script>";
+		}
+		else
+		{
+			$statement = $this->db->prepare("INSERT INTO usuarios(Nombreusu,Apellidousu,Usuario,Passwordusu,Perfil,Estado)values(:Nombread,:Apellidoad,:Usuarioad,:Passwordad,:Perfilad,:Estadoad");
 
 			$statement->bindParam(":Nombread",$Nombread);
 			$statement->bindParam(":Apellidoad",$Apellidoad);
@@ -27,37 +38,37 @@
 				header('Location: ../pages/agregar.php');
 			}
 		}
+	}
 		public function getad()
 		{
-			$row = null;
-			$statement = $this->db->prepare("SELECT * FROM usuarios WHERE Perfil = 'Administrador'");
-			$statement->execute();
-			while ($result = $statement->fetch()) 
-			{
-				$row[] = $result;	
-			}
+			$sql = "SELECT * FROM usuarios WHERE perfil='administrador'";
+			$resultado = $this->db->query($sql);
+			if($result->rowCount()>0){
+				while($row = $result->fetch()){
+					$result[] = $row;
+				}
+			}return $result;
 		}
+
+
 		public function getidad($Id)
 		{
-			$row = null;
-			$statement = $this->db->prepare("SELECT * FROM usuarios WHERE Perfil = 'Administrador' AND id_usuario = :Id");
+			$statement = $this->db->prepare("SELECT * FROM usuarios WHERE id_usuario = :Id");
 			$statement->bindParam(':Id',$Id);
 			$statement->execute();
-			while ($result = $statement->fetch()) 
-			{
-				$row = $result;
-			}
+			$resultado = $statement->fetch(PDO::FETCH_ASSOC);
 			return $row;
 		}
-		public function updatead($Id,$Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Estadoad)
+		public function updatead($Id,$Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Perfilad,$Estadoad)
 		{
-			$statement = $this->db->prepare("UPDATE usuarios SET Nombreusu = :Nombread, Apellidousu = :Apellidoad, Usuario = :Usuarioad, Passwordusu = :Passwordad, Estado = :Estadoad WHERE id_usuario = $Id");
+			$statement = $this->db->prepare("UPDATE usuarios SET id_usuario = :Id, Nombreusu = :Nombread, Apellidousu = :Apellidoad, Usuario = :Usuarioad, Passwordusu = :Passwordad, Perfil = :Perfilad, Estado = :Estadoad WHERE id_usuario = $Id");
 
 			$statement->bindParam(':Id',$Id);
 			$statement->bindParam('Nombread',$Nombread);
 			$statement->bindParam('Apellidoad',$Apellidoad);
 			$statement->bindParam('Usuarioad',$Usuarioad);
 			$statement->bindParam('Passwordad',$Passwordad);
+			$statement->bindParam('Perfilad',$Perfilad);
 			$statement->bindParam('Estadoad',$Estadoad);
 			if($statement->execute())
 			{
@@ -69,7 +80,7 @@
 			}
 
 		}
-		public function deletead($Id)
+		/*public function deletead($Id)
 		{
 			$statement = $this->db->prepare("DELETE * FROM usuarios WHERE id_usuario = :Id");
 			$statement->bindParam(':Id',$Id);
@@ -83,6 +94,6 @@
 				echo "usuario NO eliminado";
 				header ('Location: ../pages/eliminar.php')
 			}
-		}
+		}*/
 	}
 ?>
