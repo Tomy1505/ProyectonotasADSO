@@ -12,6 +12,7 @@
 			padding: 40px;
 			margin: auto;
 			margin-top: 100px;
+			margin-bottom: 100px;
 		}
 		.contenedor h1{
 			font-size: 40px;

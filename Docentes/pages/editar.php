@@ -12,6 +12,7 @@
 			padding: 40px;
 			margin: auto;
 			margin-top: 100px;
+			margin-bottom: 100px;
 		}
 		.contenedor h1{
 			font-size: 40px;
@@ -27,8 +28,16 @@
 </head>
 <body>
 	<?php 
-	require_once('../../');
-	require_once();
+		require_once('../../conexion.php');
+		require_once('../modelos/Docentes.php');
+
+		$Id = $_GET['Id'];
+		$docente = new Docente();
+		$row= $docente->getiddo($Id);
+
+		if ($row) {
+			
+
 	?>
 	<div class="contenedor">
 		<h1>Editar docentes</h1>

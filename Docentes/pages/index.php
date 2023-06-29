@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
         <title></title>
+
     </head>
     <body>
         <br>
@@ -31,7 +32,7 @@
                         require_once('../modelos/docentes.php');
                         //crear el objeto para acceder a las funciones de la clase administrador
                         $obj = new Docente();
-                        $datos = $obj->getad();
+                        $datos = $obj->getdo();
                         
                         foreach($datos as $datos){
                         ?>

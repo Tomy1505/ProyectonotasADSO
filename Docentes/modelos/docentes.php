@@ -6,38 +6,46 @@
 		{
 			$this->db = parent::__construct();
 		}
-		public function agregardo($nombredoc,$apellidodoc,$documentodoc,$correodoc,$materiadoc,$usuariodoc,$passworddoc,$perfildoc,$estadodoc)
-		{
-			$sql1 = "SELECT * FROM docentes WHERE Docente = '$usuariodoc'";
-			$Resultado = $this->db->query($sql1);
-			if($Resultado->rowCount()>0){}
+		public function agregardo($Nombredo, $Apellidodo, $Documentodo, $Correodo, $Materiado,$Usuariodo,$Passworddo,$Perfildo,$Estadodo){
+        $sql1= "SELECT * FROM docentes WHERE Usuariodoc = '$Usuariodo'";
+        $resultado=$this->db->query($sql1);
+        if($resultado->rowCount() >0){
+            echo "<script>
+            alert('El Docente ya está registrado');
+            window.location= '../pages/agregar.php';
+            </script>";
+        }
+        else{
+        $statement = $this->db->prepare("INSERT INTO docentes(Nombredoc,Apellidodoc,Documentodoc,Correodoc,Materiadoc,Usuariodoc,Passworddoc,Perfil,Estadodoc)VALUES(:Nombredo,:Apellidodo,:Documentodo,:Correodo,:Materiado,:Usuariodo,:Passworddo,:Perfildo,:Estadodo)");
 
-			$statement = $this->db->prepare("INSERT INTO docentes(Nombredoc,Apellidodoc,Documentodoc,Correodoc,Materiadoc,Usuariodoc,Passworddoc,Perfil,Estadodoc)values(:nombredoc,:apellidodoc,:documentodoc,:correodoc,:materiadoc,:usuariodoc,:passworddoc,:perfildoc,:estadodoc)");
-			
-			$statement->bindParam(":nombredoc",$nombredoc);
-			$statement->bindParam(":apellidodoc",$apellidodoc);
-			$statement->bindParam(":documentodoc",$documentodoc);
-			$statement->bindParam(":correodoc",$correodoc);
-			$statement->bindParam(":materiadoc",$materiadoc);
-			$statement->bindParam(":usuariodoc",$usuariodoc);
-			$statement->bindParam(":passworddoc",$passworddoc);
-			$statement->bindParam(":perfildoc",$perfildoc);
-			$statement->bindParam(":estadodoc",$estadodoc);
-			if($statement->execute())
-			{
-				echo "docente registrado";
-				header('Location: ..pages/index.php');
-			}
-			else
-			{
-				echo "docente No registrado";
-				header('Location: ../pages/agregar.php');
-			}
-		}
+        $statement->bindParam(":Nombredo", $Nombredo);
+        $statement->bindParam(":Apellidodo", $Apellidodo);
+        $statement->bindParam(":Documentodo", $Documentodo);
+        $statement->bindParam(":Correodo", $Correodo);
+        $statement->bindParam(":Materiado", $Materiado);
+        $statement->bindParam(":Usuariodo", $Usuariodo);
+        $statement->bindParam(":Passworddo", $Passworddo);
+        $statement->bindParam(":Perfildo", $Perfildo);
+        $statement->bindParam(":Estadodo", $Estadodo);
+
+        if($statement->execute()){
+            echo"Docente registrado";
+            header('Location: ../Pages/index.php');
+        }else{
+            echo "No se pudo realizar el docente";
+            header('Location: ../Pages/agregar.php');
+        }
+    }
+    }
 		public function getdo()
 		{
-			$sql = "SELECT * FROM docentes WHERE Perfil = 'Docente'";
-			$result = $this->db->query($sql);
+			$row =null;
+        $statement=$this->db->prepare("SELECT * FROM docentes");
+        $statement->execute();
+        while($result=$statement->fetch()){
+            $row[]=$result;
+        }
+        return $row;
 
 		}
 		public function getiddo($Id)
@@ -81,13 +89,13 @@
 			$statement->bindParam(':Id',$Id);
 			if ($statement->execute()) 
 			{
-				echo "docente eliminado";
-				header ('Location: ../pages/index.php');
+				print "<script>alert('usuario eliminado')
+				window.location='../pages/index.php'</script>";
 			}
 			else
 			{
-				echo "docente NO eliminado";
-				header ('Location: ../pages/eliminar.php');
+				print "<script>alert('usuario no eliminado')
+				window.location='../pages/eliminar.php'</script>";
 			}
 		}
 	}

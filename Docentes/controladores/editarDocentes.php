@@ -2,9 +2,8 @@
 require_once('../../conexion.php');
 require_once('../modelos/Docentes.php');
 
-    if($_POST){
-
     $docente=new Docente();
+    if($_POST){
     
     $nombredoc=$_POST['nomdoc'];
     $apellidodoc=$_POST['apedoc'];
