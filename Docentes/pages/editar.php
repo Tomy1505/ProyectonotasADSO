@@ -42,6 +42,7 @@
 	<div class="contenedor">
 		<h1>Editar docentes</h1>
 		<form action="../controladores/editarDocentes.php" method="POST">
+			<input type="hidden" name="Id" value="<?php echo $Id ?>">
 			<div class="parte">
 				<label>Nombre: </label><br>
 				<input type="text" name="nomdoc" value="<?php echo $row['Nombredoc']?>"><p>
@@ -81,11 +82,12 @@
 			<div class="parte">
 				<label>Estado: </label><br>
 				<select name="estdoc">
+				<option selected>Elegir estado</option>
 				<option value="Activo">Activo</option>
 				<option value="Inactivo">Inactivo</option><br>
 				</select><br><br>
 			</div>
-			<input type="submit" class="btn btn-primary">
+			<input type="submit" class="btn btn-primary" value="Actualizar">
 		</form>
 		<?php } ?>		
 	</div>

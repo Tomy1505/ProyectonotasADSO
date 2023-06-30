@@ -1,12 +1,12 @@
 <?php
 	require_once('../../conexion.php');
-	require_once('../modelos/Docentes.php');
+	require_once('../modelos/docentes.php');
 
-	$ad = new Docente();
+	$doc = new Docente();
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		$Id = $_POST['Id'];
-		$result = $ad->deletedo();
+		$result = $doc->deletedo();
 
 		if ($result) 
 		{

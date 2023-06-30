@@ -61,7 +61,7 @@
 		}
 		public function updatedo($Id,$Nombredo,$Apellidodo,$Documentodo,$Correodo,$Materiado,$Usuariodo,$Passworddo,$Perfildo,$Estadodo)
 		{
-			$statement = $this->db->prepare("UPDATE docentes SET Nombredoc = :Nombredo, Apellidodoc = :Apellidodo, Documentodoc = :Documentodo, Correodoc = :Correodo, Materiadoc = :Materiado, Usuariodoc = :Usuariodo, passworddoc = :Passworddo, Perfil = :Perfildo, Estadodoc = :Estadodo WHERE id_docente = $Id");
+			$statement = $this->db->prepare("UPDATE docentes SET id_docente = :Id, Nombredoc = :Nombredo, Apellidodoc = :Apellidodo, Documentodoc = :Documentodo, Correodoc = :Correodo, Materiadoc = :Materiado, Usuariodoc = :Usuariodo, passworddoc = :Passworddo, Perfil = :Perfildo, Estadodoc = :Estadodo WHERE id_docente = $Id");
 
 			$statement->bindParam(':Id',$Id);
 			$statement->bindParam('Nombredo',$Nombredo);
@@ -81,11 +81,10 @@
 			{
 				header('Location: ../pages/editar.php');
 			}
-
 		}
 		public function deletedo($Id)
 		{
-			$statement = $this->db->prepare("DELETE * FROM docentes WHERE id_docente = :Id");
+			$statement = $this->db->prepare("DELETE FROM docentes WHERE id_docente = Id");
 			$statement->bindParam(':Id',$Id);
 			if ($statement->execute()) 
 			{

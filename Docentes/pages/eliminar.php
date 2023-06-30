@@ -31,7 +31,7 @@
         <h1>Eliminar docentes</h1>
         <?php
             require_once('../../conexion.php');
-            require_once('../modelos/Docentes.php');
+            require_once('../modelos/docentes.php');
 
             $docente = new Docente();
             $Id = $_GET['Id'];
@@ -39,7 +39,7 @@
         <form action="../controladores/eliminarDocentes.php" method="POST">
             <div class="form-group">
                 <label>ID: </label><br>
-                <input class="input" type="text" name="nomdoc"><p>
+                <input class="input" type="text" name="Id"><p>
             </div>
             <input type="submit" class="btn btn-primary" value="eliminar">
         </form>     
